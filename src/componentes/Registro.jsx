@@ -6,9 +6,11 @@ import Alert from './Alert';
 export default function Registro() {
   return (
     <>
-      <h1 className="text-dark mb-3">Crea una cuenta</h1>
-      <SocialButton button_1={'fa-facebook'} button_2={'fa-github'} button_3={'fa-linkedin'} />
-      <p className="text-dark mt-3">O usa tu email para registrarte.</p>
+      <h1>Crea una cuenta</h1>
+      <SocialButton button={'fa-facebook'} />
+      <SocialButton button={'fa-github'} />
+      <SocialButton button={'fa-linkedin'} />
+      <p>O usa tu email para registrarte.</p>
       <Formulario />
       <Alert />
     </>

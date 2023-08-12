@@ -19,6 +19,17 @@ function BasicExample() {
 
   const [error, setError] = useState(false)
 
+  function validarCorreoElectronico(correo) {
+ 
+    var expresionRegular = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  
+    if (expresionRegular.test(correo)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   function validacionInputs(e) {
     e.preventDefault()
 
@@ -28,6 +39,10 @@ function BasicExample() {
       setError(true)
     } else if (password != password2) {
       let alerta = "Ambas contraseñas deben ser iguales"
+      console.log(alerta)
+      setError(true)
+    } else if (validarCorreoElectronico(email)) {
+      let alerta = "Formato de email incorrecto"
       console.log(alerta)
       setError(true)
     } else {

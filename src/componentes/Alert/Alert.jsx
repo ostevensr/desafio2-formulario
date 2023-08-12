@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Alert() {
   return (
-    <div>Alert</div>
+    <div className='msge-alerta'>Test_Alert</div>
   )
 }

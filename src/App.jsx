@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Registro from './componentes/Registro'
+import Registro from './componentes/Registro/Registro.jsx'
 import './App.css'
 
 function App() {
@@ -7,6 +7,7 @@ function App() {
   return (
     <>
       <Registro />
+
     </>
   )
 }

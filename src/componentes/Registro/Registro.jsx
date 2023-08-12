@@ -1,7 +1,7 @@
 import React from 'react';
-import SocialButton from './SocialButton';
-import Formulario from './Formulario';
-import Alert from './Alert';
+import SocialButton from '../SocialButton/SocialButton';
+import Formulario from '../Formulario/Formulario.jsx';
+import Alert from '../Alert/Alert.jsx';
 
 export default function Registro() {
   return (

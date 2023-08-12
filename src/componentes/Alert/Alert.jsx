@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function Alert() {
+export default function Alert(props) {
   return (
-    <div className='msge-alerta'>Test_Alert</div>
+    <div className='msge-alerta'>{props.alerta}</div>
   )
 }

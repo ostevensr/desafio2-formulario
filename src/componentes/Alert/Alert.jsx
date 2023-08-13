@@ -1,7 +1,12 @@
-import React from 'react'
+import React from 'react';
+import './alert.css'
 
-export default function Alert(props) {
+export default function Alert({ alerta }) {
+  const { texto, color, estado } = alerta;
+
   return (
-    <div className='msge-alerta'>{props.alerta}</div>
-  )
+    <div className={`alert ${estado ? color : 'display-none'} mt-1`}>
+      {texto}
+    </div>
+  );
 }

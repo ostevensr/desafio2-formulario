@@ -38,7 +38,7 @@ function Formulario({ addAlert }) {
 
     if (inputs.nombre.trim() === '' || inputs.email === '' || inputs.password === '' || inputs.password1 === '') {
       addAlert({
-        texto: 'Completar todos los campos!',
+        texto: 'Debes completar todos los campos!',
         tipo: 'alert-danger',
         estado: true,
       });
@@ -68,7 +68,7 @@ function Formulario({ addAlert }) {
       });
     } else {
       addAlert({
-        texto: 'Registro creado Exitosamente!',
+        texto: 'Registro creado exitosamente!',
         tipo: 'alert-success',
         estado: true,
       });

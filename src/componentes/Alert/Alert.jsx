@@ -1,8 +1,7 @@
 import React from 'react';
-import './alert.css'
+import './alert.css';
 
 export default function Alert({ alerta }) {
-
   const { texto, tipo, estado } = alerta;
 
   return (

@@ -2,8 +2,7 @@ import React from 'react';
 import SocialButton from '../SocialButton/SocialButton';
 import Formulario from '../Formulario/Formulario.jsx';
 
-export default function Registro() {
-
+export default function Registro({onAlert}) {
 
   return (
     <>
@@ -12,7 +11,7 @@ export default function Registro() {
       <SocialButton button={'fa-github'} />
       <SocialButton button={'fa-linkedin'} />
       <p>O usa tu email para registrarte.</p>
-      <Formulario />
+      <Formulario addAlert = {onAlert} />
     </>
   );
 }

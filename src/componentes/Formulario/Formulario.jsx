@@ -29,30 +29,40 @@ function Formulario({ addAlert }) {
   }
 
   function validacionInputs(e) {
-    const emailExpresionRegular = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
     e.preventDefault();
 
-    if (
-      inputs.nombre === '' ||
-      inputs.email === '' ||
-      inputs.password === '' ||
-      inputs.password1 === ''
-    ) {
+    const isValidNombre = /^[a-zA-Z0-9]{4,}$/;
+    const isValidEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const isValidPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+
+
+    if (inputs.nombre.trim() === '' || inputs.email === '' || inputs.password === '' || inputs.password1 === '') {
       addAlert({
         texto: 'Completar todos los campos!',
+        tipo: 'alert-danger',
+        estado: true,
+      });
+    } else if (!isValidNombre.test(inputs.nombre)) {
+        addAlert({
+          texto: 'El Nombre debe tener minimo 4 caracteres y no se permiten caracteres especiales!',
+          tipo: 'alert-danger',
+          estado: true,
+        });
+    } else if (!isValidEmail.test(inputs.email)) {
+      addAlert({
+        texto: 'Formato de email incorrecto!',
+        tipo: 'alert-danger',
+        estado: true,
+      });
+    } else if (!isValidPassword.test(inputs.password)) {
+      addAlert({
+        texto: 'La contraseña debe tener minimo 8 caracteres, una letra mayúscula, una letra minúscula y un número!',
         tipo: 'alert-danger',
         estado: true,
       });
     } else if (inputs.password != inputs.password1) {
       addAlert({
         texto: 'Ambas contraseñas deben ser iguales!',
-        tipo: 'alert-danger',
-        estado: true,
-      });
-    } else if (!emailExpresionRegular.test(inputs.email)) {
-      addAlert({
-        texto: 'Formato de email incorrecto!',
         tipo: 'alert-danger',
         estado: true,
       });

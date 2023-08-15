@@ -6,14 +6,32 @@ import Alert from '../Alert/Alert.jsx';
 import { useState } from 'react';
 
 function Formulario() {
-  //ORLANDO QUE LOS INPUTS SE MANEJEN A TRAVES UN OBJETO, ESCRIBE POR ACA SI NECESITAS ALGO.
-  const [nombre, setNombre] = useState('');
 
-  const [email, setEmail] = useState('');
+  const [input, setInput] = useState({
+    nombre: "",
+    email: "",
+    password: "",
+    password1: ""
+  });
 
-  const [password, setPassword] = useState('');
+  function inputHandler(e) {
+    if (e.target.id === "nombre") {
+      setInput({ ...input, nombre: e.target.value });
+    }
 
-  const [password2, setPassword2] = useState('');
+    if (e.target.id === "email") {
+      setInput({ ...input, email: e.target.value });
+    }
+
+    if (e.target.id === "password") {
+      setInput({ ...input, password: e.target.value });
+    }
+    if (e.target.id === "password1") {
+      setInput({ ...input, password1: e.target.value });
+    }
+  }
+
+  //console.log(input)
 
   const [alert, setAlert] = useState({
     texto: '',
@@ -21,42 +39,38 @@ function Formulario() {
     estado: false,
   });
 
-  function validarCorreoElectronico(correo) {
-    var expresionRegular = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
-    if (expresionRegular.test(correo)) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
   function validacionInputs(e) {
     e.preventDefault();
 
-    if (nombre === '' || email === '' || password === '' || password2 === '') {
+    function validarCorreoElectronico(c) {
+      var expresionRegular = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+      if (expresionRegular.test(c)) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    if (input.nombre === '' || input.email === '' || input.password === '' || input.password1 === '') {
       setAlert({
         texto: 'Completar todos los campos!',
         color: 'alert-danger',
         estado: true,
       });
-    } else if (password != password2) {
+    } else if (input.password != input.password1) {
       setAlert({
         texto: 'Ambas contraseñas deben ser iguales!',
         color: 'alert-danger',
         estado: true,
       });
-    } else if (validarCorreoElectronico(email)) {
+    } else if (validarCorreoElectronico(input.email)) {
       setAlert({
         texto: 'Formato de email incorrecto!',
         color: 'alert-danger',
         estado: true,
       });
     } else {
-      setNombre('');
-      setEmail('');
-      setPassword('');
-      setPassword2('');
       setAlert({
         texto: 'Registro creado Exitosamente!',
         color: 'alert-success',
@@ -65,42 +79,44 @@ function Formulario() {
     }
   }
 
+  //console.log(alert)
+
   return (
     <>
-      <Form onSubmit={validacionInputs}>
+      <Form onSubmit={(e) => validacionInputs(e)}>
         <Form.Group className="mb-3">
-          <Form.Control
+          <Form.Control onChange={(e) => inputHandler(e)}
+            id='nombre'
             name="Nombre"
             type="text"
             placeholder="Nombre"
-            onChange={(nombre) => setNombre(nombre.target.value)}
           />
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Control
+          <Form.Control onChange={(e) => inputHandler(e)}
+            id='email'
             name="Email"
             type="email"
             placeholder="tuemail@ejemplo.com"
-            onChange={(email) => setEmail(email.target.value)}
           />
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Control
+          <Form.Control onChange={(e) => inputHandler(e)}
+            id='password'
             name="password"
             type="password"
             placeholder="Contraseña"
-            onChange={(password) => setPassword(password.target.value)}
           />
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Control
-            name="password2"
+          <Form.Control onChange={(e) => inputHandler(e)}
+            id='password1'
+            name="password1"
             type="password"
             placeholder="Confirma tu contraseña"
-            onChange={(password2) => setPassword2(password2.target.value)}
           />
         </Form.Group>
 

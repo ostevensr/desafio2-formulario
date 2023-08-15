@@ -2,8 +2,8 @@ import React from 'react';
 import SocialButton from '../SocialButton/SocialButton';
 import Formulario from '../Formulario/Formulario.jsx';
 
-
 export default function Registro() {
+
 
   return (
     <>
@@ -13,7 +13,6 @@ export default function Registro() {
       <SocialButton button={'fa-linkedin'} />
       <p>O usa tu email para registrarte.</p>
       <Formulario />
-      
     </>
   );
 }

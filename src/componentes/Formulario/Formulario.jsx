@@ -7,85 +7,74 @@ import { useState } from 'react';
 
 function Formulario() {
 
-  const [input, setInput] = useState({
+  const [inputs, setInputs] = useState({
     nombre: "",
     email: "",
     password: "",
     password1: ""
   });
 
-  function inputHandler(e) {
-    if (e.target.id === "nombre") {
-      setInput({ ...input, nombre: e.target.value });
-    }
-
-    if (e.target.id === "email") {
-      setInput({ ...input, email: e.target.value });
-    }
-
-    if (e.target.id === "password") {
-      setInput({ ...input, password: e.target.value });
-    }
-    if (e.target.id === "password1") {
-      setInput({ ...input, password1: e.target.value });
-    }
-  }
-
-  //console.log(input)
-
   const [alert, setAlert] = useState({
     texto: '',
-    color: '',
+    tipo: '',
     estado: false,
   });
 
-  function validacionInputs(e) {
-    e.preventDefault();
-
-    function validarCorreoElectronico(c) {
-      var expresionRegular = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
-      if (expresionRegular.test(c)) {
-        return false;
-      } else {
-        return true;
-      }
+  function inputsHandler(e) {
+    if (e.target.id === "nombre") {
+      setInputs({ ...inputs, nombre: e.target.value });
     }
 
-    if (input.nombre === '' || input.email === '' || input.password === '' || input.password1 === '') {
+    if (e.target.id === "email") {
+      setInputs({ ...inputs, email: e.target.value });
+    }
+
+    if (e.target.id === "password") {
+      setInputs({ ...inputs, password: e.target.value });
+    }
+    if (e.target.id === "password1") {
+      setInputs({ ...inputs, password1: e.target.value });
+    }
+  }
+
+  function validacionInputs(e) {
+
+    const emailExpresionRegular = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+
+    e.preventDefault();
+
+    if (inputs.nombre === '' || inputs.email === '' || inputs.password === '' || inputs.password1 === '') {
       setAlert({
         texto: 'Completar todos los campos!',
-        color: 'alert-danger',
+        tipo: 'alert-danger',
         estado: true,
       });
-    } else if (input.password != input.password1) {
+    } else if (inputs.password != inputs.password1) {
       setAlert({
         texto: 'Ambas contraseñas deben ser iguales!',
-        color: 'alert-danger',
+        tipo: 'alert-danger',
         estado: true,
       });
-    } else if (validarCorreoElectronico(input.email)) {
+    } else if (!emailExpresionRegular.test(inputs.email)) {
       setAlert({
         texto: 'Formato de email incorrecto!',
-        color: 'alert-danger',
+        tipo: 'alert-danger',
         estado: true,
       });
     } else {
       setAlert({
         texto: 'Registro creado Exitosamente!',
-        color: 'alert-success',
+        tipo: 'alert-success',
         estado: true,
       });
     }
   }
 
-  //console.log(alert)
-
   return (
     <>
       <Form onSubmit={(e) => validacionInputs(e)}>
         <Form.Group className="mb-3">
-          <Form.Control onChange={(e) => inputHandler(e)}
+          <Form.Control onChange={(e) => inputsHandler(e)}
             id='nombre'
             name="Nombre"
             type="text"
@@ -94,7 +83,7 @@ function Formulario() {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Control onChange={(e) => inputHandler(e)}
+          <Form.Control onChange={(e) => inputsHandler(e)}
             id='email'
             name="Email"
             type="email"
@@ -103,7 +92,7 @@ function Formulario() {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Control onChange={(e) => inputHandler(e)}
+          <Form.Control onChange={(e) => inputsHandler(e)}
             id='password'
             name="password"
             type="password"
@@ -112,7 +101,7 @@ function Formulario() {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Control onChange={(e) => inputHandler(e)}
+          <Form.Control onChange={(e) => inputsHandler(e)}
             id='password1'
             name="password1"
             type="password"
@@ -124,7 +113,6 @@ function Formulario() {
           Registrarse
         </Button>
       </Form>
-
       <Alert alerta={alert} />
     </>
   );

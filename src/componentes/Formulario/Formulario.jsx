@@ -1,23 +1,17 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Alert from '../Alert/Alert.jsx';
+
 
 import { useState } from 'react';
 
-function Formulario() {
+function Formulario({addAlert}) {
 
   const [inputs, setInputs] = useState({
     nombre: "",
     email: "",
     password: "",
     password1: ""
-  });
-
-  const [alert, setAlert] = useState({
-    texto: '',
-    tipo: '',
-    estado: false,
   });
 
   function inputsHandler(e) {
@@ -44,25 +38,26 @@ function Formulario() {
     e.preventDefault();
 
     if (inputs.nombre === '' || inputs.email === '' || inputs.password === '' || inputs.password1 === '') {
-      setAlert({
+      addAlert({
         texto: 'Completar todos los campos!',
         tipo: 'alert-danger',
         estado: true,
       });
+
     } else if (inputs.password != inputs.password1) {
-      setAlert({
+      addAlert({
         texto: 'Ambas contraseñas deben ser iguales!',
         tipo: 'alert-danger',
         estado: true,
       });
     } else if (!emailExpresionRegular.test(inputs.email)) {
-      setAlert({
+      addAlert({
         texto: 'Formato de email incorrecto!',
         tipo: 'alert-danger',
         estado: true,
       });
     } else {
-      setAlert({
+      addAlert({
         texto: 'Registro creado Exitosamente!',
         tipo: 'alert-success',
         estado: true,
@@ -113,7 +108,6 @@ function Formulario() {
           Registrarse
         </Button>
       </Form>
-      <Alert alerta={alert} />
     </>
   );
 }
